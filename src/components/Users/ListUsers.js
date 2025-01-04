@@ -90,7 +90,7 @@ export const ListUsers = (props) => {
                         
                         //TODO --> envio texto a la funcion 
                         const jsonDataSend = {...contact}
-                        const res = await reportByNumber(contact.Telefono, contact.Nombre, jsonDataSend);
+                        const res = await reportByNumber(contact.Telefono, jsonDataSend);
 
                         if (res.messageSent) {
                             //Actualizar estado con el identificador unico (almacen)
@@ -139,16 +139,13 @@ export const ListUsers = (props) => {
                                 onChange={handleCheckAll}  //Manejar los cambios
                             />
                         </TableHeaderCell> 
-                        <TableHeaderCell>Nombre</TableHeaderCell>
-                        <TableHeaderCell>Técnico</TableHeaderCell>
                         <TableHeaderCell>Teléfono</TableHeaderCell>
-                        <TableHeaderCell>Supervisor</TableHeaderCell>
                         <TableHeaderCell>Enviado</TableHeaderCell>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {filteredContacts.map((contact, index) => (
-                        (contact.Telefono && contact.Nombre) && (
+                    {filteredContacts.map((contact) => (
+                        (contact.Telefono) && (
                             <TableRow key={contact.Telefono}>
                                 <TableCell>
                                     <Checkbox
@@ -156,10 +153,7 @@ export const ListUsers = (props) => {
                                         onChange={() => handleCheckboxChange(contact.Telefono)}  //manejar los cambios
                                     />
                                 </TableCell>
-                                <TableCell>{contact.Nombre}</TableCell>
-                                <TableCell>{contact.Tecnico}</TableCell>
                                 <TableCell>{contact.Telefono}</TableCell>
-                                <TableCell>{contact.Supervisor}</TableCell>
                                 <TableCell>
                                     {contact.isSend && (
                                         <Icon color='green' name='checkmark' size='large' />
